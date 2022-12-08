@@ -1,9 +1,9 @@
 import { ThemeProvider } from 'styled-components'
 
-import { theme } from './common/styles/theme'
-
 import { Footer, Header } from 'common/components'
+import { PagesRoutes } from 'common/routes/PagesRoutes'
 import { GlobalStyles } from 'common/styles/global'
+import { theme } from 'common/styles/theme'
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Header />
-        <h1>Hello</h1>
+        <PagesRoutes />
         <Footer />
       </ThemeProvider>
     </div>
