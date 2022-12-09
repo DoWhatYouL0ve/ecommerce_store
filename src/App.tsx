@@ -2,8 +2,8 @@ import { ThemeProvider } from 'styled-components'
 
 import { Footer, Header } from 'common/components'
 import { PagesRoutes } from 'common/routes/PagesRoutes'
-import { GlobalStyles } from 'common/styles/global'
-import { theme } from 'common/styles/theme'
+import { GlobalStyles } from 'common/styles/Global'
+import { theme } from 'common/styles/Theme'
 
 function App() {
   return (
