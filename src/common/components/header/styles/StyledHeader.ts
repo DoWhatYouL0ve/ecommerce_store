@@ -23,7 +23,7 @@ export const StyledHeader = styled.header`
         justify-content: space-between;
         list-style: none;
 
-        .logo-mobile {
+        .logoMobile {
           display: none;
         }
 
@@ -40,6 +40,7 @@ export const StyledHeader = styled.header`
     }
     .headerRight {
       display: flex;
+      padding-right: 1rem;
       span {
         margin: 0 5px;
 
@@ -77,7 +78,7 @@ export const StyledHeader = styled.header`
         transform: translateX(-200%);
         transition: all 0.3s;
 
-        .nav-wrapper {
+        .navWrapper {
           position: absolute;
           top: 0;
           right: 0;
@@ -88,13 +89,13 @@ export const StyledHeader = styled.header`
           transition: all 0.3s;
         }
 
-        .show-nav-wrapper {
+        .showNavWrapper {
           transform: translateX(100%);
         }
 
         ul {
           display: block;
-          .logo-mobile {
+          .logoMobile {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -113,7 +114,8 @@ export const StyledHeader = styled.header`
 
         .headerRight {
           display: block;
-            .links {
+          padding: 0;
+          .links {
             display: block;
             a {
               display: block;
@@ -124,10 +126,10 @@ export const StyledHeader = styled.header`
           }
         }
       }
-      .show-nav {
+      .showNav {
         transform: translateX(0);
       }
-      .hide-nav {
+      .hideNav {
         transform: translateX(-200%);
       }
       .menuIcon {
@@ -137,20 +139,18 @@ export const StyledHeader = styled.header`
         }
       }
     }
-  }
-  .active {
-    position: relative;
-    color: ${props => props.theme.colors.dangerColor};
-  }
-
-  .active::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    width: 100%;
-    height: 2px;
-    background-color: #fff;
-  }
+    .active {
+      position: relative;
+      color: ${props => props.theme.colors.dangerColor};
+    }
+    .active::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 100%;
+      height: 2px;
+      background-color: #fff;
+    }
   }
 `

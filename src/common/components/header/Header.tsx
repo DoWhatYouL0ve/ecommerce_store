@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import { FaBars } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { FaBars, FaTimes } from 'react-icons/fa'
+import { NavLink } from 'react-router-dom'
 
 import { PATH } from '../../routes/PagesRoutes'
 
@@ -11,6 +11,8 @@ import { StyledHeader } from './styles/StyledHeader'
 
 export const Header = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false)
+
+  const activeLink = ({ isActive }: any) => (isActive ? 'active' : '')
 
   const toggleMenu = () => {
     setShowMenu(!showMenu)
@@ -23,29 +25,51 @@ export const Header = () => {
     <StyledHeader>
       <div className={'header'}>
         <Logo />
-        <nav>
-          <div>
-            <ul>
-              <li>
-                <Link to={PATH.HOME_PAGE}>Home</Link>
-              </li>
-              <li>
-                <Link to={PATH.CONTACT}>Contact Us</Link>
-              </li>
-            </ul>
-            <div className={'headerRight'}>
-              <span className={'links'}>
-                <Link to={PATH.LOGIN}>Login</Link>
-                <Link to={PATH.REGISTRATION}>Register</Link>
-                <Link to={PATH.ORDER_HISTORY}>My Orders</Link>
+        <nav className={showMenu ? 'showNav' : 'hideNav'}>
+          <div
+            className={showMenu ? 'navWrapper' + ' ' + 'showNavWrapper' : 'navWrapper'}
+            onClick={hideMenu}
+          />
+          <ul onClick={hideMenu}>
+            <li className={'logoMobile'}>
+              <Logo />
+              <FaTimes onClick={hideMenu} size={22} color={'#fff'} />
+            </li>
+            <li>
+              <NavLink to={PATH.HOME_PAGE} className={activeLink}>
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={PATH.CONTACT} className={activeLink}>
+                Contact Us
+              </NavLink>
+            </li>
+          </ul>
+          <div className={'headerRight'} onClick={hideMenu}>
+            <span className={'links'}>
+              <NavLink to={PATH.LOGIN} className={activeLink}>
+                Login
+              </NavLink>
+              <NavLink to={PATH.REGISTRATION} className={activeLink}>
+                Register
+              </NavLink>
+              <NavLink to={PATH.ORDER_HISTORY} className={activeLink}>
+                My Orders
+              </NavLink>
+            </span>
+            {showMenu ? (
+              <span>
+                <Cart />
               </span>
+            ) : (
               <Cart />
-            </div>
+            )}
           </div>
         </nav>
         <div className={'menuIcon'}>
           <Cart />
-          <FaBars size={28} />
+          <FaBars size={28} onClick={toggleMenu} />
         </div>
       </div>
     </StyledHeader>

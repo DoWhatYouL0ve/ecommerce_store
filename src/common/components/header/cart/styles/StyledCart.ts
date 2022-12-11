@@ -17,25 +17,24 @@ export const StyledCart = styled.span`
       right: -1rem;
       font-weight: 500;
     }
-    @media screen and (max-width: 800px) {
-      display: block;
-      padding: 5px 0;
-      border-bottom: 1px solid #333;
-      a {
-        color: #fff;
-        position: relative;
-        &:hover {
-          color: orangered;
-        }
-        p {
-          position: absolute;
-          top: -1rem;
-          left: 5rem;
-          font-weight: 500;
-          color: #fff;
-        }
+  }
+  @media screen and (max-width: 800px) {
+    display: block;
+    padding: 5px 0;
+    border-bottom: 1px solid #333;
+    a {
+      color: #fff;
+      position: relative;
+      &:hover {
+        color: orangered;
       }
-    }
+      p {
+        position: absolute;
+        top: -1rem;
+        left: 3.5rem;
+        font-weight: 500;
+        color: #fff;
+      }
     }
   }
 `
