@@ -6,7 +6,7 @@ export const StyledLogo = styled.div`
     color: #fff;
     cursor: pointer;
     span {
-      color: ${props => props.theme.colors.orangered};
+      color: ${props => props.theme.colors.orange};
     }
   }
 `

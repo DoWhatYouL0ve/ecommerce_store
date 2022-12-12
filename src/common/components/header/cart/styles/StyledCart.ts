@@ -6,7 +6,7 @@ export const StyledCart = styled.span`
     color: ${props => props.theme.colors.white};
     position: relative;
     &:hover {
-      color: ${props => props.theme.colors.orangered};
+      color: ${props => props.theme.colors.orange};
     }
     &.active {
       color: ${props => props.theme.colors.dangerColor};

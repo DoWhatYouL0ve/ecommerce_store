@@ -1,17 +1,25 @@
 export type IProps = {
   colors: {
     darkBlue: string
-    orangered: string
+    orange: string
     white: string
     dangerColor: string
+    success: string
+    primary: string
+    purple: string
+    grey: string
   }
 }
 
 export const theme: IProps = {
   colors: {
     darkBlue: '#0a192d',
-    orangered: 'orangered',
+    orange: '#ff7722',
     white: '#fff',
-    dangerColor: 'red',
+    dangerColor: 'orangered',
+    success: '#28a745',
+    primary: '#007bff',
+    purple: '#9d0191',
+    grey: '#5f6561',
   },
 }

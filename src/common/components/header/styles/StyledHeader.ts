@@ -32,7 +32,7 @@ export const StyledHeader = styled.header`
           a {
             color: ${props => props.theme.colors.white};
             &:hover {
-              color: ${props => props.theme.colors.orangered};
+              color: ${props => props.theme.colors.orange};
             }
           }
         }
@@ -53,7 +53,7 @@ export const StyledHeader = styled.header`
         margin: 0 5px;
         color: ${props => props.theme.colors.white};
         &:hover {
-          color: ${props => props.theme.colors.orangered};
+          color: ${props => props.theme.colors.orange};
         }
         &.active {
           color: ${props => props.theme.colors.dangerColor};

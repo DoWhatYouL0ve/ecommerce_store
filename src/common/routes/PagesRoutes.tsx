@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 
-import { Home, Contact, Admin, Cart, OrderHistory, Registration, Login } from 'pages'
+import { Home, Contact, Admin, Cart, OrderHistory, Registration, Login, ResetPassword } from 'pages'
 
 export enum PATH {
   HOME_PAGE = '/',
@@ -10,6 +10,7 @@ export enum PATH {
   ORDER_HISTORY = '/order-history',
   REGISTRATION = '/registration',
   LOGIN = '/login',
+  RESET_PASSWORD = '/reset-password',
 }
 
 export const PagesRoutes = () => {
@@ -23,6 +24,7 @@ export const PagesRoutes = () => {
         <Route path={PATH.ORDER_HISTORY} element={<OrderHistory />} />
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.REGISTRATION} element={<Registration />} />
+        <Route path={PATH.RESET_PASSWORD} element={<ResetPassword />} />
       </Routes>
     </>
   )
