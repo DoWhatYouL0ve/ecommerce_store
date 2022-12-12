@@ -8,6 +8,7 @@ export type IProps = {
     primary: string
     purple: string
     grey: string
+    boxShadow: string
   }
 }
 
@@ -21,5 +22,6 @@ export const theme: IProps = {
     primary: '#007bff',
     purple: '#9d0191',
     grey: '#5f6561',
+    boxShadow: '#e3e3e3',
   },
 }

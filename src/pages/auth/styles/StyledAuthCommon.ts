@@ -6,6 +6,7 @@ export const StyledAuthCommon = styled.div`
   justify-content: center;
   align-items: center;
   border: 1px solid orangered;
+  background-color: ${({ theme }) => theme.colors.white};
   .img {
     animation: slide-down 0.5s ease;
   }
@@ -17,16 +18,16 @@ export const StyledAuthCommon = styled.div`
     h2 {
       color: ${({ theme }) => theme.colors.dangerColor};
       text-align: center;
-      font-size: 30px;
+      font-size: 25px;
     }
     form {
       input[type="text"],
       input[type="email"],
       input[type="password"] {
         display: block;
-        font-size: 1.6rem;
+        font-size: 1.2rem;
         font-weight: 300;
-        padding: 1rem;
+        padding: 0.5rem;
         margin: 1rem auto;
         width: 100%;
         border: 1px solid #777;
