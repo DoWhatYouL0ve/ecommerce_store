@@ -5,8 +5,6 @@ export const StyledAuthCommon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid orangered;
-  background-color: ${({ theme }) => theme.colors.white};
   .img {
     animation: slide-down 0.5s ease;
   }
