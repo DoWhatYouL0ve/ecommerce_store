@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const StyledButton = styled.button`
+  position: relative;
   font-size: 1.2rem;
   line-height: 28px;
   font-weight: 400;
@@ -25,5 +26,8 @@ export const StyledButton = styled.button`
   }
   &.primary {
     background-color: ${({ theme }) => theme.colors.primary};
+  }
+  &:active {
+    top: 1px;
   }
 `
