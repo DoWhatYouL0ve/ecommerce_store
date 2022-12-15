@@ -87,7 +87,7 @@ export const Header = () => {
               <span className={'links'}>
                 {userName ? (
                   <a href="#">
-                    <FaUserCircle size={16} />
+                    <FaUserCircle size={16} style={{ marginRight: '3px' }} />
                     Hi, {userName}!
                   </a>
                 ) : (
