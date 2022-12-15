@@ -16,9 +16,9 @@ import { StyledRegistration } from './styles/StyledRegistration'
 import 'react-toastify/dist/ReactToastify.css'
 
 export const Registration = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [confirmPassword, setConfirmPassword] = useState<string>('')
   const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
