@@ -1,14 +1,36 @@
+import { FormEvent, useState } from 'react'
+
+import { sendPasswordResetEmail } from 'firebase/auth'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import resetPasswordImg from '../../../assets/forgot.png'
 import { PATH } from '../../../common/routes/PagesRoutes'
 import { Card } from '../../../common/styles/Card'
 import { StyledButton } from '../../../common/styles/StyledButton'
+import { auth } from '../../../firebase/config'
 import { StyledAuthCommon } from '../styles/StyledAuthCommon'
 
 import { StyledResetPassword } from './styles/StyledResetPassword'
 
 export const ResetPassword = () => {
+  const [email, setEmail] = useState<string>('')
+  const [isLoading, setIsLoading] = useState(false)
+
+  const resetPassword = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsLoading(true)
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        setIsLoading(false)
+        toast.success('Please check your email for a reset link')
+      })
+      .catch(error => {
+        setIsLoading(false)
+        toast.error(error.message)
+      })
+  }
+
   return (
     <StyledResetPassword>
       <div className={'container'}>
@@ -19,9 +41,17 @@ export const ResetPassword = () => {
           <Card>
             <div className={'form'}>
               <h2>Reset Password</h2>
-              <form>
-                <input type="text" placeholder={'Email'} required />
-                <StyledButton className={'primary'}>Reset Password</StyledButton>
+              <form onSubmit={resetPassword}>
+                <input
+                  type="text"
+                  placeholder={'Email'}
+                  required
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                />
+                <StyledButton className={'primary'} type={'submit'}>
+                  Reset Password
+                </StyledButton>
               </form>
               <span className={'register'}>
                 <Link to={PATH.LOGIN}>
