@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { signOut } from 'firebase/auth'
-import { FaBars, FaTimes } from 'react-icons/fa'
+import { signOut, onAuthStateChanged } from 'firebase/auth'
+import { FaBars, FaTimes, FaUserCircle } from 'react-icons/fa'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -14,11 +14,27 @@ import { StyledHeader } from './styles/StyledHeader'
 
 export const Header = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [userName, setUserName] = useState<string | null>('')
 
   const navigate = useNavigate()
 
   const activeLink = ({ isActive }: any) => (isActive ? 'active' : '')
+
+  // monitoring if any user is logged in or not
+  useEffect(() => {
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        const uid = user.uid
+        const emailName = user.email && user.email.split('@')[0]
+
+        console.log(user)
+        setUserName(user.displayName ? user.displayName : emailName)
+      } else {
+        setUserName('')
+      }
+    })
+  }, [])
 
   const toggleMenu = () => {
     setShowMenu(!showMenu)
@@ -69,18 +85,31 @@ export const Header = () => {
             </ul>
             <div className={'headerRight'} onClick={hideMenu}>
               <span className={'links'}>
-                <NavLink to={PATH.LOGIN} className={activeLink}>
-                  Login
-                </NavLink>
-                <NavLink to={PATH.REGISTRATION} className={activeLink}>
-                  Register
-                </NavLink>
-                <NavLink to={PATH.ORDER_HISTORY} className={activeLink}>
-                  My Orders
-                </NavLink>
-                <NavLink to={PATH.HOME_PAGE} onClick={logoutUser} className={isActive => ''}>
-                  Log out
-                </NavLink>
+                {userName ? (
+                  <a href="#">
+                    <FaUserCircle size={16} />
+                    Hi, {userName}!
+                  </a>
+                ) : (
+                  <>
+                    <NavLink to={PATH.LOGIN} className={activeLink}>
+                      Login
+                    </NavLink>
+                    <NavLink to={PATH.REGISTRATION} className={activeLink}>
+                      Register
+                    </NavLink>
+                  </>
+                )}
+                {userName && (
+                  <>
+                    <NavLink to={PATH.ORDER_HISTORY} className={activeLink}>
+                      My Orders
+                    </NavLink>
+                    <NavLink to={PATH.HOME_PAGE} onClick={logoutUser} className={isActive => ''}>
+                      Log out
+                    </NavLink>
+                  </>
+                )}
               </span>
               {showMenu ? (
                 <span>
