@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react'
 
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { FaGoogle } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -20,6 +20,8 @@ export const Login = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
+  // for logIn with Google account
+  const provider = new GoogleAuthProvider()
 
   const loginUser = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -35,6 +37,22 @@ export const Login = () => {
       .catch(error => {
         setIsLoading(false)
 
+        toast.error(error.message)
+      })
+  }
+
+  const loginWithGoogle = () => {
+    setIsLoading(true)
+    signInWithPopup(auth, provider)
+      .then(result => {
+        const user = result.user
+
+        setIsLoading(false)
+        toast.success('Login successfully with Google account.')
+        navigate(PATH.HOME_PAGE)
+      })
+      .catch(error => {
+        setIsLoading(false)
         toast.error(error.message)
       })
   }
@@ -73,7 +91,7 @@ export const Login = () => {
                   </div>
                   <p>-- or --</p>
                 </form>
-                <StyledButton className={'orange'}>
+                <StyledButton className={'orange'} onClick={loginWithGoogle}>
                   <FaGoogle color={'#fff'} style={{ marginRight: '5px' }} size={22} />
                   Login With Google
                 </StyledButton>
