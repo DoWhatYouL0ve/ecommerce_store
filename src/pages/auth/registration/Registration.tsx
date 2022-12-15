@@ -2,7 +2,7 @@ import { FormEvent, useState } from 'react'
 
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { Link, useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 import registrationImg from '../../../assets/register.png'
 import { PATH } from '../../../common/routes/PagesRoutes'
@@ -12,8 +12,6 @@ import { auth } from '../../../firebase/config'
 import { StyledAuthCommon } from '../styles/StyledAuthCommon'
 
 import { StyledRegistration } from './styles/StyledRegistration'
-
-import 'react-toastify/dist/ReactToastify.css'
 
 export const Registration = () => {
   const [email, setEmail] = useState<string>('')
@@ -98,7 +96,6 @@ export const Registration = () => {
           </StyledAuthCommon>
         </div>
       </StyledRegistration>
-      <ToastContainer position="bottom-right" />
     </>
   )
 }

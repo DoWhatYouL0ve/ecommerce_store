@@ -40,52 +40,54 @@ export const Login = () => {
   }
 
   return (
-    <StyledLogin>
-      <div className={'container'}>
-        <StyledAuthCommon>
-          <div className={'img'}>
-            <img src={loginImg} alt="login image" width={460} />
-          </div>
-          <Card>
-            <div className={'form'}>
-              <h2>Login</h2>
-              <form onSubmit={loginUser}>
-                <input
-                  type="text"
-                  placeholder={'Email'}
-                  required
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                />
-                <input
-                  type="password"
-                  placeholder={'Password'}
-                  required
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                />
-                <StyledButton className={'primary'} type={'submit'}>
-                  Login
-                </StyledButton>
-                <div className={'links'}>
-                  <Link to={PATH.RESET_PASSWORD}>Forgot Password</Link>
-                </div>
-                <p>-- or --</p>
-              </form>
-              <StyledButton className={'orange'}>
-                <FaGoogle color={'#fff'} style={{ marginRight: '5px' }} size={22} />
-                Login With Google
-              </StyledButton>
-              <span className={'register'}>
-                <p>Don&apos;t have an account?</p>
-                <Link to={PATH.REGISTRATION}>
-                  <b>Register</b>
-                </Link>
-              </span>
+    <>
+      <StyledLogin>
+        <div className={'container'}>
+          <StyledAuthCommon>
+            <div className={'img'}>
+              <img src={loginImg} alt="login image" width={460} />
             </div>
-          </Card>
-        </StyledAuthCommon>
-      </div>
-    </StyledLogin>
+            <Card>
+              <div className={'form'}>
+                <h2>Login</h2>
+                <form onSubmit={loginUser}>
+                  <input
+                    type="text"
+                    placeholder={'Email'}
+                    required
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                  />
+                  <input
+                    type="password"
+                    placeholder={'Password'}
+                    required
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                  />
+                  <StyledButton className={'primary'} type={'submit'}>
+                    Login
+                  </StyledButton>
+                  <div className={'links'}>
+                    <Link to={PATH.RESET_PASSWORD}>Forgot Password</Link>
+                  </div>
+                  <p>-- or --</p>
+                </form>
+                <StyledButton className={'orange'}>
+                  <FaGoogle color={'#fff'} style={{ marginRight: '5px' }} size={22} />
+                  Login With Google
+                </StyledButton>
+                <span className={'register'}>
+                  <p>Don&apos;t have an account?</p>
+                  <Link to={PATH.REGISTRATION}>
+                    <b>Register</b>
+                  </Link>
+                </span>
+              </div>
+            </Card>
+          </StyledAuthCommon>
+        </div>
+      </StyledLogin>
+    </>
   )
 }
