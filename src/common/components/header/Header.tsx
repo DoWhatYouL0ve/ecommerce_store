@@ -5,7 +5,9 @@ import { FaBars, FaTimes, FaUserCircle } from 'react-icons/fa'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
+import { useAppDispatch } from '../../../customHooks/appHooks'
 import { auth } from '../../../firebase/config'
+import { setActiveUser } from '../../../redux/slice/authSlice'
 import { PATH } from '../../routes/PagesRoutes'
 
 import { Cart } from './cart/Cart'
@@ -17,6 +19,7 @@ export const Header = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [userName, setUserName] = useState<string | null>('')
 
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const activeLink = ({ isActive }: any) => (isActive ? 'active' : '')
@@ -25,11 +28,19 @@ export const Header = () => {
   useEffect(() => {
     onAuthStateChanged(auth, user => {
       if (user) {
-        const uid = user.uid
         const emailName = user.email && user.email.split('@')[0]
 
+        const userActiveName = user.displayName ? user.displayName : emailName
+
         console.log(user)
-        setUserName(user.displayName ? user.displayName : emailName)
+        setUserName(userActiveName)
+        dispatch(
+          setActiveUser({
+            email: user.email,
+            userName: userActiveName,
+            userID: user.uid,
+          })
+        )
       } else {
         setUserName('')
       }
