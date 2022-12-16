@@ -24,13 +24,19 @@ const authSlice = createSlice({
 
       state.isLoggedIn = true
       state.email = email
-      state.userID = userName
+      state.userName = userName
       state.userID = userID
+    },
+    deleteActiveUser: state => {
+      state.isLoggedIn = false
+      state.email = null
+      state.userName = null
+      state.userID = null
     },
   },
 })
 
-export const { setActiveUser } = authSlice.actions
+export const { setActiveUser, deleteActiveUser } = authSlice.actions
 export default authSlice.reducer
 
 // types

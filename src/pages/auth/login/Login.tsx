@@ -27,9 +27,7 @@ export const Login = () => {
     e.preventDefault()
     setIsLoading(true)
     signInWithEmailAndPassword(auth, email, password)
-      .then(userCredential => {
-        const user = userCredential.user
-
+      .then(() => {
         setIsLoading(false)
         toast.success('Login successful...')
         navigate(PATH.HOME_PAGE)
@@ -44,9 +42,7 @@ export const Login = () => {
   const loginWithGoogle = () => {
     setIsLoading(true)
     signInWithPopup(auth, provider)
-      .then(result => {
-        const user = result.user
-
+      .then(() => {
         setIsLoading(false)
         toast.success('Login successfully with Google account.')
         navigate(PATH.HOME_PAGE)

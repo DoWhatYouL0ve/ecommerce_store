@@ -31,12 +31,7 @@ export const Registration = () => {
     }
     setIsLoading(true)
     createUserWithEmailAndPassword(auth, email, password)
-      .then(userCredential => {
-        // Signed in
-        const user = userCredential.user
-
-        // ...
-        console.log(user)
+      .then(() => {
         setIsLoading(false)
         toast.success('Registration successful')
         navigate(PATH.LOGIN)

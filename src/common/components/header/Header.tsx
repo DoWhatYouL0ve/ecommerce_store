@@ -5,9 +5,9 @@ import { FaBars, FaTimes, FaUserCircle } from 'react-icons/fa'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { useAppDispatch } from '../../../customHooks/appHooks'
+import { useAppDispatch, useAppSelector } from '../../../customHooks/appHooks'
 import { auth } from '../../../firebase/config'
-import { setActiveUser } from '../../../redux/slice/authSlice'
+import { deleteActiveUser, setActiveUser } from '../../../redux/slice/authSlice'
 import { PATH } from '../../routes/PagesRoutes'
 
 import { Cart } from './cart/Cart'
@@ -15,9 +15,10 @@ import { Logo } from './logo/Logo'
 import { StyledHeader } from './styles/StyledHeader'
 
 export const Header = () => {
+  const userName = useAppSelector(store => store.auth.userName)
+
   const [showMenu, setShowMenu] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [userName, setUserName] = useState<string | null>('')
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -32,8 +33,6 @@ export const Header = () => {
 
         const userActiveName = user.displayName ? user.displayName : emailName
 
-        console.log(user)
-        setUserName(userActiveName)
         dispatch(
           setActiveUser({
             email: user.email,
@@ -42,10 +41,10 @@ export const Header = () => {
           })
         )
       } else {
-        setUserName('')
+        dispatch(deleteActiveUser())
       }
     })
-  }, [])
+  }, [dispatch, userName])
 
   const toggleMenu = () => {
     setShowMenu(!showMenu)
@@ -116,7 +115,7 @@ export const Header = () => {
                     <NavLink to={PATH.ORDER_HISTORY} className={activeLink}>
                       My Orders
                     </NavLink>
-                    <NavLink to={PATH.HOME_PAGE} onClick={logoutUser} className={isActive => ''}>
+                    <NavLink to={PATH.HOME_PAGE} onClick={logoutUser} className={() => ''}>
                       Log out
                     </NavLink>
                   </>
