@@ -7,8 +7,9 @@ import { toast } from 'react-toastify'
 
 import { useAppDispatch, useAppSelector } from '../../../customHooks/appHooks'
 import { auth } from '../../../firebase/config'
-import { deleteActiveUser, setActiveUser } from '../../../redux/slice/authSlice'
+import { deleteActiveUser, setActiveUser, setIsLoading } from '../../../redux/slice/authSlice'
 import { PATH } from '../../routes/PagesRoutes'
+import { LoadingProcess } from '../loaders/Loader/Loader'
 
 import { Cart } from './cart/Cart'
 import { Logo } from './logo/Logo'
@@ -16,9 +17,10 @@ import { StyledHeader } from './styles/StyledHeader'
 
 export const Header = () => {
   const userName = useAppSelector(store => store.auth.userName)
+  const isLoggedIn = useAppSelector(store => store.auth.isLoggedIn)
+  const isLoading = useAppSelector(store => store.auth.isLoading)
 
   const [showMenu, setShowMenu] = useState<boolean>(false)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -54,15 +56,15 @@ export const Header = () => {
   }
 
   const logoutUser = () => {
-    setIsLoading(true)
+    setIsLoading({ isLoading: true })
     signOut(auth)
       .then(() => {
-        setIsLoading(false)
+        setIsLoading({ isLoading: false })
         toast.success('Logout successfully')
         navigate(PATH.HOME_PAGE)
       })
       .catch(error => {
-        setIsLoading(false)
+        setIsLoading({ isLoading: false })
         toast.error(error.message)
       })
   }
@@ -95,7 +97,7 @@ export const Header = () => {
             </ul>
             <div className={'headerRight'} onClick={hideMenu}>
               <span className={'links'}>
-                {userName ? (
+                {isLoggedIn ? (
                   <a href="#">
                     <FaUserCircle size={16} style={{ marginRight: '3px' }} />
                     Hi, {userName}!
@@ -110,7 +112,7 @@ export const Header = () => {
                     </NavLink>
                   </>
                 )}
-                {userName && (
+                {isLoggedIn && (
                   <>
                     <NavLink to={PATH.ORDER_HISTORY} className={activeLink}>
                       My Orders
@@ -135,6 +137,7 @@ export const Header = () => {
             <FaBars size={28} onClick={toggleMenu} />
           </div>
         </div>
+        {isLoading && <LoadingProcess />}
       </StyledHeader>
     </>
   )

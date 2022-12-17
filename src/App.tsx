@@ -5,6 +5,7 @@ import { Footer, Header } from 'common/components'
 import { PagesRoutes } from 'common/routes/PagesRoutes'
 import { GlobalStyles } from 'common/styles/Global'
 import { theme } from 'common/styles/Theme'
+
 import 'react-toastify/dist/ReactToastify.css'
 
 function App() {

@@ -33,10 +33,13 @@ const authSlice = createSlice({
       state.userName = null
       state.userID = null
     },
+    setIsLoading: (state, action: PayloadAction<{ isLoading: boolean }>) => {
+      state.isLoading = action.payload.isLoading
+    },
   },
 })
 
-export const { setActiveUser, deleteActiveUser } = authSlice.actions
+export const { setActiveUser, deleteActiveUser, setIsLoading } = authSlice.actions
 export default authSlice.reducer
 
 // types

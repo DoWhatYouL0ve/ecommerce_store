@@ -8,16 +8,19 @@ import registrationImg from '../../../assets/register.png'
 import { PATH } from '../../../common/routes/PagesRoutes'
 import { Card } from '../../../common/styles/Card'
 import { StyledButton } from '../../../common/styles/StyledButton'
+import { useAppSelector } from '../../../customHooks/appHooks'
 import { auth } from '../../../firebase/config'
+import { setIsLoading } from '../../../redux/slice/authSlice'
 import { StyledAuthCommon } from '../styles/StyledAuthCommon'
 
 import { StyledRegistration } from './styles/StyledRegistration'
 
 export const Registration = () => {
+  const isLoading = useAppSelector(store => store.auth.isLoading)
+
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [confirmPassword, setConfirmPassword] = useState<string>('')
-  const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
 
@@ -29,15 +32,15 @@ export const Registration = () => {
     if (password.length < 6) {
       toast.error('Password should be at least 6 characters')
     }
-    setIsLoading(true)
+    setIsLoading({ isLoading: true })
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        setIsLoading(false)
+        setIsLoading({ isLoading: false })
         toast.success('Registration successful')
         navigate(PATH.LOGIN)
       })
       .catch(error => {
-        setIsLoading(false)
+        setIsLoading({ isLoading: false })
 
         toast.error(error.message)
       })

@@ -4,6 +4,7 @@ export const StyledHeader = styled.header`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.darkBlue};
   color: #fff;
+  position: relative;
   .header {
     width: 100%;
     height: 6rem;

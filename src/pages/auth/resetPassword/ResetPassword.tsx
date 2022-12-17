@@ -9,24 +9,24 @@ import { PATH } from '../../../common/routes/PagesRoutes'
 import { Card } from '../../../common/styles/Card'
 import { StyledButton } from '../../../common/styles/StyledButton'
 import { auth } from '../../../firebase/config'
+import { setIsLoading } from '../../../redux/slice/authSlice'
 import { StyledAuthCommon } from '../styles/StyledAuthCommon'
 
 import { StyledResetPassword } from './styles/StyledResetPassword'
 
 export const ResetPassword = () => {
   const [email, setEmail] = useState<string>('')
-  const [isLoading, setIsLoading] = useState(false)
 
   const resetPassword = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsLoading(true)
+    setIsLoading({ isLoading: true })
     sendPasswordResetEmail(auth, email)
       .then(() => {
-        setIsLoading(false)
+        setIsLoading({ isLoading: false })
         toast.success('Please check your email for a reset link')
       })
       .catch(error => {
-        setIsLoading(false)
+        setIsLoading({ isLoading: false })
         toast.error(error.message)
       })
   }

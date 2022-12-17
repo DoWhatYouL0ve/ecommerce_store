@@ -14,10 +14,11 @@ import { StyledAuthCommon } from '../styles/StyledAuthCommon'
 import loginImg from './../../../assets/login.png'
 import { StyledLogin } from './styles/StyledLogin'
 
+import { setIsLoading } from 'redux/slice/authSlice'
+
 export const Login = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
   // for logIn with Google account
@@ -25,30 +26,30 @@ export const Login = () => {
 
   const loginUser = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsLoading(true)
+    setIsLoading({ isLoading: true })
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        setIsLoading(false)
+        setIsLoading({ isLoading: false })
         toast.success('Login successful...')
         navigate(PATH.HOME_PAGE)
       })
       .catch(error => {
-        setIsLoading(false)
+        setIsLoading({ isLoading: false })
 
         toast.error(error.message)
       })
   }
 
   const loginWithGoogle = () => {
-    setIsLoading(true)
+    setIsLoading({ isLoading: true })
     signInWithPopup(auth, provider)
       .then(() => {
-        setIsLoading(false)
+        setIsLoading({ isLoading: false })
         toast.success('Login successfully with Google account.')
         navigate(PATH.HOME_PAGE)
       })
       .catch(error => {
-        setIsLoading(false)
+        setIsLoading({ isLoading: false })
         toast.error(error.message)
       })
   }
