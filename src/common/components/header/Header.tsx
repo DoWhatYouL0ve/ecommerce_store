@@ -98,7 +98,7 @@ export const Header = () => {
             <div className={'headerRight'} onClick={hideMenu}>
               <span className={'links'}>
                 {isLoggedIn ? (
-                  <a href="#">
+                  <a href="#" style={{ color: '#ff7722' }}>
                     <FaUserCircle size={16} style={{ marginRight: '3px' }} />
                     Hi, {userName}!
                   </a>
