@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 
@@ -18,6 +18,12 @@ export const Slider = () => {
   const nextSlide = () => {
     setCurrentSlide(currentSlide === sliderLength - 1 ? 0 : currentSlide + 1)
   }
+
+  useEffect(() => {
+    const slideInterval = setInterval(nextSlide, 5000)
+
+    return () => clearInterval(slideInterval)
+  }, [currentSlide])
 
   return (
     <>
